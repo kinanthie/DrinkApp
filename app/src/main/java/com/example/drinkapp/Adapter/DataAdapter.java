@@ -1,4 +1,5 @@
-package com.example.drinkapp.Adapter;
+package com.example.drinkrecipe.Adapter;
+
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -16,14 +17,16 @@ import com.example.drinkapp.DetailActivity;
 import com.example.drinkapp.Model.DataModel;
 import com.example.drinkapp.R;
 
+
+
 import java.util.ArrayList;
 
-public class DataAdapter extends RecyclerView.Adapter {
+public class DataAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-    private ArrayList dataModelArrayList;
+    private ArrayList<DataModel> dataModelArrayList;
     private Activity activity;
 
-    public DataAdapter(Activity activity, ArrayList dataModelArrayList) {
+    public DataAdapter(Activity activity, ArrayList<DataModel> dataModelArrayList) {
         this.activity = activity;
         this.dataModelArrayList = dataModelArrayList;
     }

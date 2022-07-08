@@ -7,6 +7,7 @@ public class DataModel implements Serializable {
     Integer viewType;
     String judul, konten;
 
+
     public Integer getViewType() {
         return viewType;
     }

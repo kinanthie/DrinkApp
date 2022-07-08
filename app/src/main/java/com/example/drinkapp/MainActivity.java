@@ -1,36 +1,54 @@
 package com.example.drinkapp;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.annotation.SuppressLint;
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.ProgressDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.ProgressBar;
+import android.widget.Toast;
 
-import com.example.drinkapp.Adapter.DataAdapter;
 import com.example.drinkapp.Model.DataModel;
+import com.example.drinkrecipe.Adapter.DataAdapter;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 
 import java.util.ArrayList;
+import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity<recyclerView, dataAdapter> extends AppCompatActivity {
+    private FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-    public DataAdapter dataAdapter;
+    public com.example.drinkrecipe.Adapter.DataAdapter dataAdapter;
     public RecyclerView recyclerView;
-    public ArrayList dataModelArrayList = new ArrayList();
+    public ArrayList<DataModel> dataModelArrayList = new ArrayList<DataModel>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //membuat data yang akan ditampilkan dalam list
-        //file .html mengambil di folder assets
-        inputData("Green Tea", "resep.html");
-
+        inputData("Greentea", "artikel1.html");
+        inputData("Choco Hazelnut", "artikel1.html");
+        inputData("Strawberry Milkshake", "artikel1.html");
+        inputData("Lemon Tea", "artikel1.html");
+        inputData("Thai Tea", "ThaiTea");
+        inputData("Chocolate", "artikel1.html");
 
         //menampilkan data ke dalam recyclerView
         recyclerView = findViewById(R.id.recyclerView);
@@ -40,10 +58,6 @@ public class MainActivity extends AppCompatActivity {
         dataAdapter = new DataAdapter(this, dataModelArrayList);
         recyclerView.setAdapter(dataAdapter);
 
-        /*//menambahakan header
-        DataModel headerModel = new DataModel();
-        headerModel.setViewType(2);
-        dataModelArrayList.add(0, headerModel);*/
 
         //menambahkan footer
         DataModel footerModel = new DataModel();
@@ -70,9 +84,9 @@ public class MainActivity extends AppCompatActivity {
         dataModelArrayList.add(dataModel);
     }
 
-    public static void setWindowFlag(MainActivity activity, final int bits, boolean on) {
+    public static void setWindowFlag(Activity activity, final int bits, boolean on) {
         Window win = activity.getWindow();
-        WindowManager.LayoutParams winParams = ((Window) win).getAttributes();
+        WindowManager.LayoutParams winParams = win.getAttributes();
         if (on) {
             winParams.flags |= bits;
         } else {
@@ -80,5 +94,5 @@ public class MainActivity extends AppCompatActivity {
         }
         win.setAttributes(winParams);
     }
-
 }
+

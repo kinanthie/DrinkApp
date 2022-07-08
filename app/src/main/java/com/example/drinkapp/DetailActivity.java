@@ -25,8 +25,7 @@ public class DetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.detail_drink);
 
-        //Toolbar
-        setupToolbar();
+
 
         mProgressBar = findViewById(R.id.progress_bar);
         mProgressBar.setMax(100);
@@ -41,7 +40,7 @@ public class DetailActivity extends AppCompatActivity {
 
         //tampil data konten
         webView = findViewById(R.id.webView);
-        webView.loadUrl("file:///android_asset/" + dataModel.getKonten());
+        webView.loadUrl("file:///android_assets/" + dataModel.getKonten());
         webView.setWebViewClient(new WebViewClient() {
 
             @Override
@@ -64,11 +63,6 @@ public class DetailActivity extends AppCompatActivity {
         });
     }
 
-    private void setupToolbar() {
-        Toolbar toolbar = findViewById(R.id.detail);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
